@@ -11,8 +11,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/btcsuite/btcd/btcec"
-	"github.com/btcsuite/btcd/wire"
+	"github.com/mraksoll4/btcd/btcec"
+	"github.com/mraksoll4/btcd/wire"
 )
 
 // ScriptFlags is a bitmask defining additional operations or tests that will be
@@ -572,7 +572,7 @@ func (vm *Engine) checkHashTypeEncoding(hashType SigHashType) error {
 		return nil
 	}
 
-	sigHashType := hashType & ^SigHashAnyOneCanPay
+	sigHashType := hashType & ^SigHashAnyOneCanPay & ^SigHashForkID
 	if sigHashType < SigHashAll || sigHashType > SigHashSingle {
 		str := fmt.Sprintf("invalid hash type 0x%x", hashType)
 		return scriptError(ErrInvalidSigHashType, str)
